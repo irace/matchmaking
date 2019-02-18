@@ -4,6 +4,7 @@ import { Link } from "gatsby";
 import React from "react";
 import SEO from "../components/seo";
 import { graphql } from "gatsby";
+import styled from "styled-components";
 
 export const query = graphql`
   query HomePageQuery {
@@ -19,6 +20,11 @@ export const query = graphql`
       }
     }
   }
+`;
+
+const ImageContainer = styled.div`
+  max-width: 300px;
+  margin-bottom: 1.45rem;
 `;
 
 const IndexPage = ({ data }) => (
@@ -40,9 +46,9 @@ const IndexPage = ({ data }) => (
         </div>
       );
     })}
-    <div style={{ maxWidth: `300px`, marginBottom: `1.45rem` }}>
+    <ImageContainer>
       <Image />
-    </div>
+    </ImageContainer>
     <Link to="/page-2/">Go to page 2</Link>
   </Layout>
 );
