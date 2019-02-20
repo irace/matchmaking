@@ -14,9 +14,9 @@ const Container = styled.div`
   padding: 1.45rem 1.0875rem;
 `;
 
-const StyledLink = styled(Link)/*.attrs({
+const StyledLink = styled(Link).attrs({
   className: "f1"
-})*/ `
+})`
   color: white;
   text-decoration: none;
 `;

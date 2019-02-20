@@ -1,4 +1,3 @@
-import "./layout.css";
 import "tachyons/css/tachyons.css";
 
 import { StaticQuery, graphql } from "gatsby";
@@ -8,12 +7,16 @@ import PropTypes from "prop-types";
 import React from "react";
 import styled from "styled-components";
 
-const Container = styled.div`
+const Container = styled.div.attrs({ className: "sans-serif" })``;
+
+const Content = styled.div.attrs({ className: "sans-serif" })`
   margin: 0 auto;
   max-width: 960px;
   padding: 0px 1.0875rem 1.45rem;
   padding-top: 0;
 `;
+
+const Footer = styled.footer.attrs({ className: "copy lh-copy f7" })``;
 
 const Layout = ({ children }) => (
   <StaticQuery
@@ -27,17 +30,13 @@ const Layout = ({ children }) => (
       }
     `}
     render={data => (
-      <>
+      <Container>
         <Header siteTitle={data.site.siteMetadata.title} />
-        <Container>
+        <Content>
           <main>{children}</main>
-          <footer>
-            © {new Date().getFullYear()}, Built with
-            {` `}
-            <a href="https://www.gatsbyjs.org">Gatsby</a>
-          </footer>
-        </Container>
-      </>
+          <Footer>© {new Date().getFullYear()}</Footer>
+        </Content>
+      </Container>
     )}
   />
 );

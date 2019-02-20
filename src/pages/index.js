@@ -1,6 +1,5 @@
-import Image from "../components/image";
+import CardsContainer from "../components/CardsContainer";
 import Layout from "../components/layout";
-import { Link } from "gatsby";
 import React from "react";
 import SEO from "../components/seo";
 import { graphql } from "gatsby";
@@ -22,34 +21,33 @@ export const query = graphql`
   }
 `;
 
-const ImageContainer = styled.div`
-  max-width: 300px;
-  margin-bottom: 1.45rem;
+const Heading = styled.h2.attrs({ className: "f2" })``;
+
+const Username = styled.a.attrs({ className: "link dim" })`
+  color: rebeccapurple;
 `;
+
+const Description = styled.div.attrs({ className: "copy f6 lh-copy" })``;
 
 const IndexPage = ({ data }) => (
   <Layout>
     <SEO title="Home" keywords={[`gatsby`, `application`, `react`]} />
-    <h1>Matchmaking</h1>
-    {data.allJobsYaml.edges.map(edge => {
-      return (
-        <div>
-          <div>@{edge.node.username}</div>
-          {edge.node.jobs.map(job => {
-            return (
-              <>
-                <div>{job.title}</div>
-                <div>{job.description}</div>
-              </>
-            );
-          })}
-        </div>
-      );
-    })}
-    <ImageContainer>
-      <Image />
-    </ImageContainer>
-    <Link to="/page-2/">Go to page 2</Link>
+    {data.allJobsYaml.edges
+      .map(edge => edge.node)
+      .map(node => {
+        return (
+          <>
+            <Heading>
+              <Username href={`https://twitter.com/${node.username}`}>@{node.username}</Username>
+            </Heading>
+            <Description>
+              These are listings from friends who I know well enough to highly recommend working with. If you’re interested, and you know me
+              well enough to get in touch with me, I’d be happy to make an introduction for you.
+            </Description>
+            <CardsContainer jobs={node.jobs} />
+          </>
+        );
+      })}
   </Layout>
 );
 
